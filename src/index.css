@@ -1,14 +1,275 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+a{
+    text-decoration: none;
+    color: darkblue;
+}
+
+a:hover{
+    color: darkmagenta;
+}
+
+.bold{
+    font-weight: 700;
+}
+
+span{
+    font-style: italic;
+    font-weight: 500;
+}
+
+.loading{
+    font-size: 36px;
+    margin-top: 100px;
+    margin-left: 100px;
+}
+
+.settings{
+    border-top: 5px solid #4a76a8;
+    box-shadow: 0 0 15px 3px lightgray;
+    position: fixed;
+    right: 10%;
+    top: 100px;
+    width: 245px;
+    height: 440px;
+}
+.settings *{
+    font-size: 18px;
+}
+
+.settings > *{
+    width: 83%;
+    margin: 14px auto 0 auto;
+}
+
+.settings-header{
+    margin-top: 40px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.settings select{
+    width: 70%;
+    margin-left: calc(15%);
+}
+
+.sortings{
+    display: flex;
+    width: 100%;
+}
+
+.sortings *{
+    margin-top: 12px;
+}
+
+.sortings > *:first-child{
+    margin-left: 25px;
+}
+
+.sortings p{
+    margin-left: 5px;
+    font-size: 16px;
+}
+
+.buttons{
+    display: flex;
+}
+
+.yearBtn{
+    height: 50px;
+    margin: 5px;
+}
+
+.entries > h2{
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+.entry:first-child{
+    margin-top: 80px;
+}
+
+.entry:last-child{
+    margin-bottom: 40px;
+}
+
+.entry {
+    display: flex;
+    width: 50%;
+    max-width: 1000px;
+    margin-left: 16%;
+    margin-top: 40px;
+    justify-content: space-around;
+    flex-direction: column;
+    box-shadow: 0 0 15px 2px grey;
+}
+
+.entry + .entry{
+    margin-top: 40px;
+}
+
+.entry .entry{
+    margin: 20px auto;
+
+}
+
+.entry-text{
+    text-align: left;
+    margin-left: 30px;
+    width: calc(100% - 60px);
+}
+
+.margined-text{
+    margin-left: 30px;
+    width: calc(100% - 60px);
+}
+
+
+.leftside-img{ /*TODO: onClick: open img */
+    width: 200px;
+    height: 140px;
+    margin: 10px;
+    margin-left: 30px;
+    float: left;
+}
+
+.entry-head{
+    padding-top: 20px;
+    width: 100%;
+}
+
+
+.no-repeat-contain-img{
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.attachments{
+    width: calc(100% - 120px);
+    margin-left: 60px;
+}
+
+.attachments > *{
+    text-align: center;
+    font-size: 22px;
+    margin: 20px auto;
+}
+
+
+.attachments > p{
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-top: 1px solid grey;
+}
+
+.attachments > .entry{
+    text-align: left;
+    width: 90%;
+}
+
+.attachments > .entry > .entry-footer{
+    display: block;
+}
+
+.attachments > .entry > .entry-footer > button{
+    left: calc(80% - 95px);
+}
+
+.att-btn{
+    height: 20px;
+    width: 185px;
+    position: relative;
+    top: 30px;
+    background: inherit;
+    border: none;
+    border-bottom: 0.5px solid grey;
+    font-size: 18px;
+    font-weight: 600;
+    opacity: 0.67;
+}
+
+.att-btn:hover{
+    cursor: pointer;
+}
+
+.att-btn:focus{
+    outline: none;
+}
+
+.att-btn:active{
+    outline: none;
+}
+
+.att-photo{
+    height: 120px;
+    width: 140px;
+}
+
+.video-div{
+    width: 160px;
+}
+
+.att-video{
+    height: 120px;
+}
+
+.att-audio{
+    text-align: left;
+    width: 70%;
+    margin-left: 30%;
+}
+
+
+.answers{
+    width: 70%;
+    margin-left: 15%;
+}
+
+.answers *{
+    text-align: left;
+}
+
+
+.entry-footer{
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.entry-pic{
+    width: 200px;
+}
+
+.likes-reposts{
+    margin-top: 26px;
+    margin-left: 30px;
+}
+
+.likes-reposts > *{
+    margin-right: 18px;
+}
+
+.likes-reposts > * > div{
+    margin-left: 10px;
+}
+
+.like-img{
+    background-size: contain;
+    background: url("./img/likes.png") no-repeat;
+    width: 20px;
+    height: 20px;
+}
+
+.repost-img{
+    background: url("./img/reposts.png") no-repeat;
+    width: 30px;
+    height: 30px;
 }
