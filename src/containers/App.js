@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Page } from '../components/Page'
 import { getEntries, sortEntries } from '../actions/PageActions'
-import {store} from '../store/configureStore'
 
 class App extends Component{
     render(){
