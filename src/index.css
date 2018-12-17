@@ -128,7 +128,7 @@ span{
 }
 
 
-.leftside-img{ /*TODO: onClick: open img */
+.leftside-img{
     width: 200px;
     height: 140px;
     margin: 10px;
@@ -136,11 +136,15 @@ span{
     float: left;
 }
 
+.leftside-img div{
+    width: 100%;
+    height: 100%;
+}
+
 .entry-head{
     padding-top: 20px;
     width: 100%;
 }
-
 
 .no-repeat-contain-img{
     background-size: contain;
@@ -157,7 +161,6 @@ span{
     font-size: 22px;
     margin: 20px auto;
 }
-
 
 .attachments > p{
     font-weight: 700;
@@ -204,8 +207,13 @@ span{
 }
 
 .att-photo{
-    height: 120px;
-    width: 140px;
+    width: 160px;
+    height: 140px;
+}
+
+.att-photo > a > div{
+    width: 160px;
+    height: 140px;
 }
 
 .video-div{

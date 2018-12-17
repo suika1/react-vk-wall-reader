@@ -63,7 +63,7 @@ export class Entry extends React.Component{
                 switch(item.type){
                     case 'photo':
                         ans = ans.concat(
-                            <a href={item.photo.url}><div key={index} className='att-photo no-repeat-contain-img' style={{backgroundImage: `url(${item.photo.sizes[3].url})`}}/></a>
+                            <div key={index} className='att-photo'><a href={item.photo.sizes[4].url}><div className='no-repeat-contain-img' style={{backgroundImage: `url(${item.photo.sizes[3].url})`}}/></a></div>
                         );
                         break;
                     case 'link':
@@ -134,10 +134,13 @@ export class Entry extends React.Component{
                         entry.attachments.find(a => a.type === 'photo').photo.sizes[3].url
                     })`,
                 };
-                return <div
-                    className='leftside-img no-repeat-contain-img'
-                    style={style}
-                />
+                return (
+                    <div className='leftside-img'>
+                        <a href={entry.attachments.find(a => a.type === 'photo').photo.sizes[3].url}>
+                            <div style={style} className='no-repeat-contain-img'/>
+                        </a>
+                    </div>
+                )
             }
         };
 
