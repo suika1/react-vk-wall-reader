@@ -63,7 +63,7 @@ export class Entry extends React.Component{
                 switch(item.type){
                     case 'photo':
                         ans = ans.concat(
-                            <div key={index} className='att-photo no-repeat-contain-img' style={{backgroundImage: `url(${item.photo.sizes[3].url})`}}/>
+                            <a href={item.photo.url}><div key={index} className='att-photo no-repeat-contain-img' style={{backgroundImage: `url(${item.photo.sizes[3].url})`}}/></a>
                         );
                         break;
                     case 'link':
