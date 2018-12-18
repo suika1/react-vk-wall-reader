@@ -61,11 +61,14 @@ function makeYearEntries(entries, year){
 
 function getMoreEntries(dispatch, year, count, offset, url){
     let urlPropName;
-    if (/-?\d+/.test(url)){
+    if (/-?\d+(?=\W)/.test(url)){
+        console.log(`its id!!`);
         urlPropName = 'owner_id';
     }else{
+        console.log(`it's nickname!`)
         urlPropName = 'domain';
     }
+    console.log(`offset = ${offset}`);
 // eslint-disable-next-line no-undef
     VK.Api.call(
         'wall.get', //method for request to API
@@ -79,9 +82,12 @@ function getMoreEntries(dispatch, year, count, offset, url){
         r => {
             try {
                 entriesArr = entriesArr.concat(r.response.items);
-                if (offset <= r.response.count){ //if end of wall isn't yet reached
+                //if end of wall isn't yet reached and offset isn't too big
+                if (offset <= r.response.count && offset < 400){
                     getMoreEntries(dispatch, year, count, offset+100, url);
+                    console.log(`current year = ${new Date(r.response.items[0].date * 1000).getFullYear()} for id = ${r.response.items[0].id}`);
                 }else{ //if all entries are present
+                    console.log(`\n\n\n\n\nhello`);
                     let entries = makeYearEntries(entriesArr, year);
                     entriesYearMap.set(year, entries);
                     dispatch(getEntriesSuccess(entries));
