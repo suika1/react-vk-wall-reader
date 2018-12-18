@@ -8,6 +8,7 @@ export const SORT_DESC_DATE = 'SORT_DESC_DATE';
 export const SORT_INC_DATE = 'SORT_INC_DATE';
 export const SORT_DESC_REPOSTS = 'SORT_DESC_REPOSTS';
 export const SORT_INC_REPOSTS = 'SORT_INC_REPOSTS';
+export const SET_URL = 'SET_URL';
 
 const NETWORK_ERROR = 'NETWORK_ERROR';
 
@@ -30,6 +31,20 @@ const getEntriesFail = error => ({
     error: error,
 });
 
+const setUrlAction = newUrl => ({
+    type: SET_URL,
+    url: newUrl
+});
+
+//Dispatch received url & call getEntries action
+export const setUrl = newUrl => {
+    return dispatch => {
+        dispatch(setUrlAction(newUrl));
+        entriesYearMap = new Map();
+        dispatch(getEntries(new Date().getFullYear(), newUrl));
+    }
+};
+
 function makeYearEntries(entries, year){
     let createdYear,
         yearEntries = [];
@@ -44,12 +59,18 @@ function makeYearEntries(entries, year){
     return yearEntries;
 }
 
-function getMoreEntries(dispatch, year, count, offset){
+function getMoreEntries(dispatch, year, count, offset, url){
+    let urlPropName;
+    if (/-?\d+/.test(url)){
+        urlPropName = 'owner_id';
+    }else{
+        urlPropName = 'domain';
+    }
 // eslint-disable-next-line no-undef
     VK.Api.call(
         'wall.get', //method for request to API
         { //params for request to API
-            owner_id: -120211608,
+            [urlPropName]: url,
             extended: 1,
             count: count,
             offset: offset,
@@ -59,7 +80,7 @@ function getMoreEntries(dispatch, year, count, offset){
             try {
                 entriesArr = entriesArr.concat(r.response.items);
                 if (offset <= r.response.count){ //if end of wall isn't yet reached
-                    getMoreEntries(dispatch, year, count, offset+100);
+                    getMoreEntries(dispatch, year, count, offset+100, url);
                 }else{ //if all entries are present
                     let entries = makeYearEntries(entriesArr, year);
                     entriesYearMap.set(year, entries);
@@ -74,7 +95,7 @@ function getMoreEntries(dispatch, year, count, offset){
     )
 }
 
-export function getEntries(year){
+export function getEntries(year = new Date().getFullYear(), url = 'itvectorsoc'){
     return dispatch => {
         let mapValue = entriesYearMap.get(year);
         dispatch(getEntriesRequest(year));
@@ -83,7 +104,7 @@ export function getEntries(year){
             dispatch(sortEntries(year, SORT_DESC_LIKES));
         }else{ //if need to send request to server
             entriesArr = [];
-            getMoreEntries(dispatch, year, 100, 0);
+            getMoreEntries(dispatch, year, 100, 0, url);
         }
     }
 }

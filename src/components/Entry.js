@@ -206,7 +206,7 @@ export class Entry extends React.Component{
         const renderText = (entry) => {
             if (entry.text){
                 if (!(entry.attachments && entry.attachments.find(a => a.type === 'photo'))) { //if there is no leftside-image
-                    return (<div className='margined-text'><p>{convertAnchors(entry.text)}</p></div>);
+                    return (<div className='margined-text'><p key={entry.date}>{convertAnchors(entry.text)}</p></div>);
                 }
                 return (<p className='entry-text'>{convertAnchors(entry.text)}</p>);
             }else{

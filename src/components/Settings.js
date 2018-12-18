@@ -17,24 +17,27 @@ export class Settings extends React.Component{
     };
 
     onRadioChange = e => {
-        this.props.sortEntries(this.props.currentYear, e.target.value);
+        if (!this.props.isFetching)
+            this.props.sortEntries(this.props.currentYear, e.target.value);
     };
 
     onChangeYear = e => {
-        this.props.getEntries(parseInt(e.target.value));
+        if (!this.props.isFetching)
+            this.props.getEntries(parseInt(e.target.value), this.props.url);
     };
 
     render(){
         const renderYear = () => {
+            let year = new Date().getFullYear();
             return (
                 <div className="year-div">
                     <label>
                         <p className='bold'>Год:</p>
                         <select defaultValue={this.props.currentYear} onChange={this.onChangeYear}>
-                            <option value='2018'>2018</option>
-                            <option value='2017'>2017</option>
-                            <option value='2016'>2016</option>
-                            <option value='2015'>2015</option>
+                            <option value={year}>{year}</option>
+                            <option value={year-1}>{year-1}</option>
+                            <option value={year-2}>{year-2}</option>
+                            <option value={year-3}>{year-3}</option>
                         </select>
                     </label>
                 </div>
@@ -102,6 +105,7 @@ export class Settings extends React.Component{
                 {renderDateSorts()}
                 {renderLikesSorts()}
                 {renderRepostsSorts()}
+                <button className='login-btn' onClick={this.props.onLogin}>Login</button>
             </div>
         )
     }
@@ -112,5 +116,8 @@ Settings.propTypes = {
     currentSort: PropTypes.string.isRequired,
     getEntries: PropTypes.func.isRequired,
     sortEntries: PropTypes.func.isRequired,
+    onLogin: PropTypes.func.isRequired,
+    url: PropTypes.string.isRequired,
+    isFetching: PropTypes.bool.isRequired,
 };
 

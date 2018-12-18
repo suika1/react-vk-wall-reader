@@ -4,6 +4,10 @@
     font-family: 'Roboto', sans-serif;
 }
 
+body{
+    overflow-x: hidden;
+}
+
 a{
     text-decoration: none;
     color: darkblue;
@@ -28,11 +32,16 @@ span{
     margin-left: 100px;
 }
 
+.error{
+    width: 60%;
+    margin: 200px auto 0 auto;
+}
+
 .settings{
     border-top: 5px solid #4a76a8;
     box-shadow: 0 0 15px 3px lightgray;
     position: fixed;
-    right: 10%;
+    right: 8%;
     top: 100px;
     width: 245px;
     height: 440px;
@@ -83,13 +92,67 @@ span{
     margin: 5px;
 }
 
+.login-btn{
+    position: relative;
+    height: 40px;
+    top: 30px;
+    left: 20px;
+    background-color: white;
+    border: 1px solid #8e91a0;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+}
+
+.login-btn:hover {
+    box-shadow: 0 0 15px 4px lightgray;
+}
+
+.link-chooser{
+    box-sizing: border-box;
+    width: 405px;
+    border: 10px solid white;
+    border-radius: 15px;
+    box-shadow: 0 0 15px 3px lightgray;
+    margin-top: 50px;
+    margin-left: 30%;
+    display: flex;
+}
+
+.link-chooser > p{
+    position: relative;
+    top: 2px;
+    width: 125px;
+}
+
+.link-chooser > input{
+    width: 200px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+}
+
+.link-chooser > button{
+    position: relative;
+    left: 10px;
+    background-color: white;
+    border: 1px solid #8e91a0;
+    border-radius: 8px;
+    width: 45px;
+    cursor: pointer;
+}
+
+
+.link-chooser > button:hover {
+    box-shadow: 0 0 15px 4px lightgray;
+}
+
 .entries > h2{
     margin-top: 5%;
     margin-left: 5%;
 }
 
 .entry:first-child{
-    margin-top: 80px;
+    margin-top: 50px;
 }
 
 .entry:last-child{
@@ -280,4 +343,79 @@ span{
     background: url("./img/reposts.png") no-repeat;
     width: 30px;
     height: 30px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .settings {
+        right: 5px;
+    }
+
+    .error{
+        width: 60%;
+        margin: 200px auto 0 auto;
+    }
+
+    .loading{
+        margin: 10px auto;
+    }
+
+    .link-chooser{
+        margin-left: 22%;
+    }
+
+    .attachments > .entry > .entry-footer > .att-btn{
+        left: calc(50% - 92px);
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .link-chooser{
+        margin: 20px auto;
+    }
+
+    .error{
+        width: 60%;
+        margin: 600px auto 0 auto;
+    }
+
+    .settings{
+        position: absolute;
+        left: calc(50% - 122px);
+    }
+
+    .loading{
+        margin: 10px auto;
+    }
+
+    .entries > *:first-child{
+        margin-top: 580px;
+    }
+
+    .entries > *{
+        margin: 0 auto;
+        width: 80%;
+    }
+}
+
+
+@media only screen and (max-width: 450px) {
+
+
+    .entry-footer{
+        height: 100px;
+    }
+
+    .link-chooser {
+        width: 300px;
+    }
+
+    .link-chooser > input{
+        width: 100px;
+    }
+
+    .att-btn{
+        border: none;
+        position: relative;
+        bottom: 80px;
+    }
 }
