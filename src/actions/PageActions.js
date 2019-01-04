@@ -65,7 +65,7 @@ function getMoreEntries(dispatch, year, count, offset, url){
         console.log(`its id!!`);
         urlPropName = 'owner_id';
     }else{
-        console.log(`it's nickname!`)
+        console.log(`it's nickname!`);
         urlPropName = 'domain';
     }
     console.log(`offset = ${offset}`);

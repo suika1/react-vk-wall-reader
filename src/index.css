@@ -350,6 +350,10 @@ span{
         right: 5px;
     }
 
+    .entry a{
+        word-break: break-all;
+    }
+
     .error{
         width: 60%;
         margin: 200px auto 0 auto;

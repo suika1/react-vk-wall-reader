@@ -14,7 +14,7 @@ import {
 
 
 const initialState = {
-    year: 2018,
+    year: new Date().getFullYear(),
     entries: [],
     isFetching: false,
     sortFunc: SORT_DESC_LIKES,
