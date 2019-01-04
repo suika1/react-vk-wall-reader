@@ -1,7 +1,7 @@
 import React from 'react';
-import {Entry} from "./Entry";
+import {Entry} from "../Entry/Entry";
 import PropTypes from 'prop-types'
-import {Settings} from "./Settings";
+import {Settings} from "../Settings/Settings";
 
 export class Page extends React.Component{
     constructor(props){
