@@ -16,15 +16,16 @@ export class Entry extends React.Component{
     //render all attachments if button toggled
     renderAttachments = (attachments) => {
         if (this.state.isShowingAttachments) {
-            if (!attachments)
+            if (!attachments) {
                 return (<p>Вложения отсутствуют</p>);
+            }
             let attByTypes = new Map();
 
             //adding all attachments by types (to render them together in 1 block)
             attachments.forEach(a => {
                 if (attByTypes.get(a.type)) {
                     attByTypes.set(a.type, attByTypes.get(a.type).concat(a));
-                }else{
+                } else {
                     attByTypes.set(a.type, [a]);    //setting initial arrays for each type of attachments
                 }
             });
@@ -127,9 +128,9 @@ export class Entry extends React.Component{
         //Renders first image onto left side of text field
         const renderImg = (entry) => {
             if (entry.attachments
-                && entry.attachments.find(a => a.type === 'photo'))
-            {
-                let style = {
+                && entry.attachments.find(a => a.type === 'photo')
+            ) {
+                const style = {
                     backgroundImage: `url(${
                         entry.attachments.find(a => a.type === 'photo').photo.sizes[3].url
                     })`,
@@ -140,14 +141,14 @@ export class Entry extends React.Component{
                             <div style={style} className='no-repeat-contain-img'/>
                         </a>
                     </div>
-                )
+                );
             }
         };
 
         //converts text links into anchors
         const convertAnchors = (text) => {
             let ans = []; //answer - returning value
-            let words = text.split(" ");
+            const words = text.split(" ");
 
             const doAnchor = (word, indexWord) => {
                 let ref = '';
@@ -192,10 +193,10 @@ export class Entry extends React.Component{
                    if (index > 0) { //if link isn't at start of word
                        ans = ans.concat(word.slice(0, index)+" ");
                        doAnchor(word.slice(index, word.length), indexWord);
-                   }else{ //if link is at start of word
+                   } else { //if link is at start of word
                        doAnchor(word, indexWord);
                    }
-               }else {
+               } else {
                    ans = ans.concat(word+" "); //if word isn't link
                }
             });
@@ -208,10 +209,13 @@ export class Entry extends React.Component{
                 if (!(entry.attachments && entry.attachments.find(a => a.type === 'photo'))) { //if there is no leftside-image
                     return (<div className='margined-text'><p key={entry.date}>{convertAnchors(entry.text)}</p></div>);
                 }
-                return (<p className='entry-text'>{convertAnchors(entry.text)}</p>);
-            }else{
-                return (<div className='entry-text'><p>Текст отсутствует</p></div>)
+                return (
+                    <p className='entry-text'>{convertAnchors(entry.text)}</p>
+                );
             }
+            return (
+                <div className='entry-text'><p>Текст отсутствует</p></div>
+            );
         };
 
         //text for 'show-attachments' button
@@ -219,13 +223,13 @@ export class Entry extends React.Component{
 
         //Renders copied\quoted post as a new Entry into current Entry
         const renderCopyHistory = (copyHistory) => {
-            if (copyHistory){
+            if (copyHistory) {
                 return <Entry entry={copyHistory[0]}/>
             }
         };
 
         const renderLikesReposts = (entry) => {
-            if (entry.likes && entry.reposts){
+            if (entry.likes && entry.reposts) {
                 return (
                     <div className='flex-row likes-reposts'>
                         <div className='flex-row'>
@@ -259,7 +263,7 @@ export class Entry extends React.Component{
         );
     };
 
-    render(){
+    render() {
         return this.renderRow(this.props.entry);
     }
 }

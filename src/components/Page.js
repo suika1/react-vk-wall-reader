@@ -17,17 +17,18 @@ export class Page extends React.Component{
     }
 
     renderEntries = (entries) => {
-        if (entries && entries.length === 0)
+        if (entries && entries.length === 0) {
             return (<h2>Записей за данный год не обнаружено</h2>);
-        if (entries)
+        }
+        if (entries) {
             return entries.map(entry =>
                 <Entry
                     key={entry.id}
                     entry={entry}
                 />
             );
-        else
-            return '';
+        }
+        return '';
     };
 
     //rendering entries
@@ -41,12 +42,14 @@ export class Page extends React.Component{
             this.props.setUrlAction(this.state.url);
         };
 
-        const {entries, isFetching, error} = this.props;
+        const { entries, isFetching, error } = this.props;
 
         const renderEntriesList = (entries) => {
             if (error){
-                return <p className='error'>Во время загрузки записей произошла ошибка</p>
-            }else{
+                return (
+                    <p className='error'>Во время загрузки записей произошла ошибка</p>
+                );
+            } else {
                 return (
                     <div className='entries'>
                         {this.renderEntries(entries)}
@@ -56,23 +59,24 @@ export class Page extends React.Component{
         };
 
         if (isFetching){
-            return <p className='loading'>Загрузка...</p>
-        }else{
             return (
-                <div>
-                    <div className='link-chooser'>
-                        <p>https://vk.com/</p>
-                        <input type='text' onChange={onInputChange} value={this.state.url}/>
-                        <button onClick={onSendUrl}>Go</button>
-                    </div>
-                    {renderEntriesList(entries)}
-                </div>
-            )
+                <p className='loading'>Загрузка...</p>
+            );
         }
+        return (
+            <div>
+                <div className='link-chooser'>
+                    <p>https://vk.com/</p>
+                    <input type='text' onChange={onInputChange} value={this.state.url}/>
+                    <button onClick={onSendUrl}>Go</button>
+                </div>
+                {renderEntriesList(entries)}
+            </div>
+        );
     };
 
-    render(){
-        const {year} = this.props;
+    render() {
+        const { year } = this.props;
         return (
             <div className='page'>
                 {this.renderTemplate()}
