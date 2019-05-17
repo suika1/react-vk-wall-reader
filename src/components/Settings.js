@@ -12,23 +12,24 @@ import {
 //Settings pane class
 export class Settings extends React.Component{
 
-    isChecked = type => {
-      return type === this.props.currentSort;
-    };
+    isChecked = type => type === this.props.currentSort;
 
     onRadioChange = e => {
-        if (!this.props.isFetching)
-            this.props.sortEntries(this.props.currentYear, e.target.value);
+        const { isFetching, sortEntries, currentYear } = this.props;
+        if (!isFetching)
+            sortEntries(currentYear, e.target.value);
     };
 
     onChangeYear = e => {
-        if (!this.props.isFetching)
-            this.props.getEntries(parseInt(e.target.value), this.props.url);
+        const { isFetching, getEntries, url } = this.props;
+        if (!isFetching) {
+            getEntries(parseInt(e.target.value), url);
+        }
     };
 
-    render(){
+    render() {
         const renderYear = () => {
-            let year = new Date().getFullYear();
+            const year = new Date().getFullYear();
             return (
                 <div className="year-div">
                     <label>
@@ -44,59 +45,53 @@ export class Settings extends React.Component{
             );
         };
 
-        const renderDateSorts = () => {
-            return (
-                <div className='date-sortings'>
-                    <p className='bold'>Дата:</p>
-                    <label className='sortings'>
-                        <input type='radio' name='sort' value={SORT_INC_DATE} onChange={this.onRadioChange}
-                               checked={this.isChecked(SORT_INC_DATE)} className='radio'/>
-                        <p>По возрастанию</p>
-                    </label>
-                    <label className='sortings'>
-                        <input type='radio' name='sort' value={SORT_DESC_DATE} onChange={this.onRadioChange}
-                               checked={this.isChecked(SORT_DESC_DATE)} className='radio'/>
-                        <p>По убыванию</p>
-                    </label>
-                </div>
-            );
-        };
+        const renderDateSorts = () => (
+            <div className='date-sortings'>
+                <p className='bold'>Дата:</p>
+                <label className='sortings'>
+                    <input type='radio' name='sort' value={SORT_INC_DATE} onChange={this.onRadioChange}
+                            checked={this.isChecked(SORT_INC_DATE)} className='radio'/>
+                    <p>По возрастанию</p>
+                </label>
+                <label className='sortings'>
+                    <input type='radio' name='sort' value={SORT_DESC_DATE} onChange={this.onRadioChange}
+                            checked={this.isChecked(SORT_DESC_DATE)} className='radio'/>
+                    <p>По убыванию</p>
+                </label>
+            </div>
+        );
 
-        const renderLikesSorts = () => {
-            return (
-                <div className='likes-sortings'>
-                    <p className='bold'>Лайки:</p>
-                    <label className='sortings'>
-                        <input type='radio' name='sort' value={SORT_INC_LIKES} onChange={this.onRadioChange}
-                               checked={this.isChecked(SORT_INC_LIKES)} className='radio'/>
-                        <p>По возрастанию</p>
-                    </label>
-                    <label className='sortings'>
-                        <input type='radio' name='sort' value={SORT_DESC_LIKES} onChange={this.onRadioChange}
-                               checked={this.isChecked(SORT_DESC_LIKES)} className='radio'/>
-                        <p>По убыванию</p>
-                    </label>
-                </div>
-            );
-        };
+        const renderLikesSorts = () => (
+            <div className='likes-sortings'>
+                <p className='bold'>Лайки:</p>
+                <label className='sortings'>
+                    <input type='radio' name='sort' value={SORT_INC_LIKES} onChange={this.onRadioChange}
+                            checked={this.isChecked(SORT_INC_LIKES)} className='radio'/>
+                    <p>По возрастанию</p>
+                </label>
+                <label className='sortings'>
+                    <input type='radio' name='sort' value={SORT_DESC_LIKES} onChange={this.onRadioChange}
+                            checked={this.isChecked(SORT_DESC_LIKES)} className='radio'/>
+                    <p>По убыванию</p>
+                </label>
+            </div>
+        );
 
-        const renderRepostsSorts = () => {
-            return(
-                <div className='reposts-sortings'>
-                    <p className='bold'>Репосты:</p>
-                    <label className='sortings'>
-                        <input type='radio' name='sort' value={SORT_INC_REPOSTS} onChange={this.onRadioChange}
-                               checked={this.isChecked(SORT_INC_REPOSTS)} className='radio'/>
-                        <p>По возрастанию</p>
-                    </label>
-                    <label className='sortings'>
-                        <input type='radio' name='sort' value={SORT_DESC_REPOSTS} onChange={this.onRadioChange}
-                               checked={this.isChecked(SORT_DESC_REPOSTS)} className='radio'/>
-                        <p>По убыванию</p>
-                    </label>
-                </div>
-            );
-        };
+        const renderRepostsSorts = () => (
+            <div className='reposts-sortings'>
+                <p className='bold'>Репосты:</p>
+                <label className='sortings'>
+                    <input type='radio' name='sort' value={SORT_INC_REPOSTS} onChange={this.onRadioChange}
+                            checked={this.isChecked(SORT_INC_REPOSTS)} className='radio'/>
+                    <p>По возрастанию</p>
+                </label>
+                <label className='sortings'>
+                    <input type='radio' name='sort' value={SORT_DESC_REPOSTS} onChange={this.onRadioChange}
+                            checked={this.isChecked(SORT_DESC_REPOSTS)} className='radio'/>
+                    <p>По убыванию</p>
+                </label>
+            </div>
+        );
 
         return (
             <div className='settings'>
