@@ -6,8 +6,8 @@ import {
     SORT_DESC_LIKES,
     SORT_INC_LIKES,
     SORT_DESC_REPOSTS,
-    SORT_INC_REPOSTS
-} from "../actions/PageActions";
+    SORT_INC_REPOSTS,
+} from "../thunks/page";
 
 //Settings pane class
 export class Settings extends React.Component{

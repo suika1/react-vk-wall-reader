@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Page } from '../components/Page'
-import { getEntries, sortEntries, setUrl } from '../actions/PageActions'
-import {handleLogin} from "../actions/LoginActions";
+import { getEntries, sortEntries, setUrl } from '../thunks/page'
+import { handleLogin } from "../thunks/login";
 
 class App extends Component{
     render(){

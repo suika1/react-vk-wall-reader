@@ -1,16 +1,18 @@
 import {
+    SORT,
+    SORT_DESC_LIKES,
+} from '../thunks/page';
+import {
     GET_ENTRIES_FAIL,
     GET_ENTRIES_SUCCESS,
     GET_ENTRIES_REQUEST,
-    SORT,
-    SORT_DESC_LIKES,
     SET_URL,
-} from "../actions/PageActions";
+} from '../action-types/page';
 import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     LOGIN_FAIL
-} from "../actions/LoginActions";
+} from '../action-types/login';
 
 
 const initialState = {
