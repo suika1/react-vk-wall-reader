@@ -167,16 +167,24 @@ export class Entry extends React.Component{
 
                 //reduce link's length
                 if (word.length > 22) {
-                    ans = ans.concat(<a key={-indexWord} href={ref}>{word.slice(0, 20)+"..."}</a>);
+                    ans = ans.concat(
+                        <a key={-indexWord} href={ref}>
+                            {word.slice(0, 20)+"..."}
+                        </a>
+                    );
                 } else {
-                    ans = ans.concat(<a key={-indexWord} href={ref}>{ref}</a>);
+                    ans = ans.concat(
+                        <a key={-indexWord} href={ref}>
+                            {ref}
+                        </a>
+                    );
                 }
 
                 if (word.indexOf('\n') !== -1){
                     //if second part(after empty symbols) of word is link - process it independently as a link
                     if (word.slice(word.indexOf('\n'), word.length).indexOf('http://') !== -1
                         || word.slice(word.indexOf('\n'), word.length).indexOf('https://') !== -1){
-                        doAnchor(word.slice(word.indexOf('\n'), word.length));
+                        doAnchor(word.slice(word.indexOf('\n')), word.length);
                     }else {
                         ans = ans.concat(word.slice(word.indexOf('\n'), word.length));
                     }
@@ -207,10 +215,18 @@ export class Entry extends React.Component{
         const renderText = (entry) => {
             if (entry.text){
                 if (!(entry.attachments && entry.attachments.find(a => a.type === 'photo'))) { //if there is no leftside-image
-                    return (<div className='margined-text'><p key={entry.date}>{convertAnchors(entry.text)}</p></div>);
+                    return (
+                        <div className='margined-text'>
+                            <p key={entry.date}>
+                                {convertAnchors(entry.text)}
+                            </p>
+                        </div>
+                    );
                 }
                 return (
-                    <p className='entry-text'>{convertAnchors(entry.text)}</p>
+                    <p className='entry-text'>
+                        {convertAnchors(entry.text)}
+                    </p>
                 );
             }
             return (
