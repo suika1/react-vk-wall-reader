@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {Entry} from "./Entry";
 import PropTypes from 'prop-types'
 import {Settings} from "./Settings";
@@ -8,6 +9,7 @@ export class Page extends React.Component{
         super(props);
         this.state = {
             url: 'itvectorsoc',
+            modalLink: '',
         }
     }
 
@@ -16,6 +18,36 @@ export class Page extends React.Component{
         this.props.getEntries(this.props.year, this.props.url);
     }
 
+    renderModal = () => {
+        const {
+            modalLink,
+        } = this.state;
+
+        if (modalLink && modalLink.length) {
+            return ReactDOM.createPortal((
+                <div className="page-modal-wrapper" onClick={(e) => {
+                    if (e.target.className.includes('page-modal-wrapper')) {
+                        this.closeModal();
+                    }
+                }}>
+                    <div className="page-modal-content">
+                        <div
+                            className="modal-img"
+                            style={{
+                                backgroundImage: `url("${modalLink}")`,
+                            }}
+                        />
+                    </div>
+                </div>
+            ), document.getElementById('root'));
+        }
+        return '';
+    }
+
+    openModal = (modalLink) => this.setState({ modalLink });
+
+    closeModal = () => this.setState({ modalLink: '' });
+
     renderEntries = (entries) => {
         if (entries && entries.length === 0) {
             return (<h2>Записей за данный год не обнаружено</h2>);
@@ -23,6 +55,7 @@ export class Page extends React.Component{
         if (entries) {
             return entries.map(entry =>
                 <Entry
+                    openModal={this.openModal}
                     key={entry.id}
                     entry={entry}
                 />
@@ -89,6 +122,7 @@ export class Page extends React.Component{
                     onLogin={this.props.onLogin}
                     isFetching={this.props.isFetching}
                 />
+                {this.renderModal()}
             </div>
         );
     }

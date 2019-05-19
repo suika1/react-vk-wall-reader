@@ -1,5 +1,5 @@
 import * as actions from '../actions/login';
-import { getEntries } from '../actions/page';
+import { getEntries } from './page';
 
 export const handleLogin = () => (dispatch) => {
   dispatch(actions.loginRequest());
