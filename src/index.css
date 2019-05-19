@@ -212,6 +212,9 @@ span{
 .no-repeat-contain-img{
     background-size: contain;
     background-repeat: no-repeat;
+
+    height: 100%;
+    background-position: center;
 }
 
 .attachments{
@@ -343,6 +346,35 @@ span{
     background: url("./img/reposts.png") no-repeat;
     width: 30px;
     height: 30px;
+}
+
+.page-modal-wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.78);
+}
+
+.page-modal-content {
+    margin: 0 auto;
+
+    width: 400px;
+    height: 400px;
+
+    position: relative;
+    top: calc(50% - 200px);
+}
+
+.modal-img {
+    width: 100%;
+    height: 100%;
+
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 @media only screen and (max-width: 1024px) {

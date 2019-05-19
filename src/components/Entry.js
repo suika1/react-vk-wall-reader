@@ -15,6 +15,7 @@ export class Entry extends React.Component{
 
     //render all attachments if button toggled
     renderAttachments = (attachments) => {
+        const { openModal } = this.props;
         if (this.state.isShowingAttachments) {
             if (!attachments) {
                 return (<p>Вложения отсутствуют</p>);
@@ -64,21 +65,48 @@ export class Entry extends React.Component{
                 switch(item.type){
                     case 'photo':
                         ans = ans.concat(
-                            <div key={index} className='att-photo'><a href={item.photo.sizes[4].url}><div className='no-repeat-contain-img' style={{backgroundImage: `url(${item.photo.sizes[3].url})`}}/></a></div>
+                            <div key={index} className='att-photo'>
+                                <div
+                                    className='no-repeat-contain-img'
+                                    style={{backgroundImage: `url(${item.photo.sizes[3].url})`}}
+                                    onClick={() => openModal(item.photo.sizes[3].url)}
+                                />
+                            </div>
                         );
                         break;
                     case 'link':
                         ans = ans.concat(
                             <div key={index} className='att-link'>
                                 <p> Оглавление: <span>{item.link.title}</span></p>
-                                <p> URL: <a className='att-anchor' href={item.link.url}><span>{item.link.url.length > 30 ? item.link.url.slice(0, 28).concat("...") : item.link.url}</span></a></p>
+                                <p> URL:
+                                    <a
+                                        className='att-anchor'
+                                        href={item.link.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                    <span>
+                                        {item.link.url.length > 30 ? item.link.url.slice(0, 28).concat("...") : item.link.url}
+                                    </span>
+                                </a></p>
                             </div>
                         );
                         break;
                     case 'video':
                         ans = ans.concat(
                             <div key={index} className='video-div'>
-                                <a href={`http://vk.com/video${item.video.owner_id}_${item.video.id}`}><div className='att-video no-repeat-contain-img' style={{backgroundImage: `url(${item.video['photo_800'] || item.video['photo_640'] || item.video['photo_320']})`}}/></a>
+                                <a
+                                    href={`http://vk.com/video${item.video.owner_id}_${item.video.id}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <div
+                                        className='att-video no-repeat-contain-img'
+                                        style={{
+                                            backgroundImage: `url(${item.video['photo_800'] || item.video['photo_640'] || item.video['photo_320']})`
+                                        }}
+                                    />
+                                </a>
                                 <span>{item.video.title}</span>
                             </div>
                         );
@@ -87,7 +115,15 @@ export class Entry extends React.Component{
                         ans = ans.concat(
                             <div key={index}>
                                 <p>Название: <span>{item.doc.title}</span></p>
-                                <a href={item.doc.url}><span>{item.doc.url.length > 30 ? item.doc.url.slice(0, 28).concat("...") : item.doc.url}</span></a>
+                                <a
+                                    href={item.doc.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <span>
+                                        {item.doc.url.length > 30 ? item.doc.url.slice(0, 28).concat("...") : item.doc.url}
+                                    </span>
+                                </a>
                             </div>);
                         break;
                     case 'poll':
@@ -127,6 +163,7 @@ export class Entry extends React.Component{
     renderRow = (entry) => {
         //Renders first image onto left side of text field
         const renderImg = (entry) => {
+            const { openModal } = this.props;
             if (entry.attachments
                 && entry.attachments.find(a => a.type === 'photo')
             ) {
@@ -137,9 +174,11 @@ export class Entry extends React.Component{
                 };
                 return (
                     <div className='leftside-img'>
-                        <a href={entry.attachments.find(a => a.type === 'photo').photo.sizes[3].url}>
-                            <div style={style} className='no-repeat-contain-img'/>
-                        </a>
+                        <div
+                            style={style}
+                            className='no-repeat-contain-img'
+                            onClick={() => openModal(entry.attachments.find(a => a.type === 'photo').photo.sizes[3].url)}
+                        />
                     </div>
                 );
             }
@@ -168,13 +207,23 @@ export class Entry extends React.Component{
                 //reduce link's length
                 if (word.length > 22) {
                     ans = ans.concat(
-                        <a key={-indexWord} href={ref}>
+                        <a
+                            key={-indexWord}
+                            href={ref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             {word.slice(0, 20)+"..."}
                         </a>
                     );
                 } else {
                     ans = ans.concat(
-                        <a key={-indexWord} href={ref}>
+                        <a
+                            key={-indexWord}
+                            href={ref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             {ref}
                         </a>
                     );
@@ -240,7 +289,13 @@ export class Entry extends React.Component{
         //Renders copied\quoted post as a new Entry into current Entry
         const renderCopyHistory = (copyHistory) => {
             if (copyHistory) {
-                return <Entry entry={copyHistory[0]}/>
+                const { openModal } = this.props;
+                return (
+                    <Entry
+                        openModal={openModal}
+                        entry={copyHistory[0]}
+                    />
+                );
             }
         };
 
