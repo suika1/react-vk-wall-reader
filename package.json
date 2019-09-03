@@ -1,6 +1,6 @@
 {
-  "homepage": "http://suika1.github.io/react-vk-wall-reader",
-  "name": "react-vk-wall-reader",
+  "homepage": "http://suika.ru/vk-wall-reader",
+  "name": "vk-wall-reader",
   "version": "0.1.0",
   "private": true,
   "engines": {
